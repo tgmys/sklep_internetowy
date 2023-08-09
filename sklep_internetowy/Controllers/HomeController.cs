@@ -11,6 +11,7 @@ namespace sklep_internetowy.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //praca nad finkcjonalnością
             return View();
         }
     }
