@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sklep_internetowy", "sklep_internetowy.csproj", "{4ACE82A5-6565-465E-AA76-2ED43163CE73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sklep_internetowy.Tests", "..\sklep_internetowy.Tests\sklep_internetowy.Tests.csproj", "{3DB50E4E-F0B0-45B8-8F25-0701650EBA73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ACE82A5-6565-465E-AA76-2ED43163CE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACE82A5-6565-465E-AA76-2ED43163CE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACE82A5-6565-465E-AA76-2ED43163CE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACE82A5-6565-465E-AA76-2ED43163CE73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB50E4E-F0B0-45B8-8F25-0701650EBA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB50E4E-F0B0-45B8-8F25-0701650EBA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB50E4E-F0B0-45B8-8F25-0701650EBA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB50E4E-F0B0-45B8-8F25-0701650EBA73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDFB98F1-17B2-48E8-8289-0BE7C528683A}
+	EndGlobalSection
+EndGlobal
