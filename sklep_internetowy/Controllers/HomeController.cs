@@ -13,9 +13,8 @@ namespace sklep_internetowy.Controllers
         private KursyContext db = new KursyContext();
         public ActionResult Index()
         {
-            Kategoria kategoria = new Kategoria { NazwaKategorii = "asp.net mvc", NazwaPlikuIkony = "aspNetMVC.png", OpisKategorii = "opis" };
-            db.Kategorie.Add(kategoria);
-            db.SaveChanges();
+            var listaKategorii = db.Kategorie.ToList();
+  
           
             return View();
         }

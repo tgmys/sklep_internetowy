@@ -14,6 +14,10 @@ namespace sklep_internetowy.DAL
         {
 
         }
+        static KursyContext()
+        {
+            Database.SetInitializer<KursyContext>(new KursyInitializer());
+        }
         public DbSet<Kurs> Kursy { get; set; }
         public DbSet<Kategoria> Kategorie { get; set; }
         public DbSet<PozycjaZamowienia> PozycjeZamowienia { get; set; }
