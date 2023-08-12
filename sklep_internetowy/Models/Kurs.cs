@@ -10,7 +10,7 @@ namespace sklep_internetowy.Models
     {
         public int KursId { get; set; }
         public int KategoriaID { get; set; }
-        [Required(ErrorMessage ="Wprowadz nazwę kursu")]
+        [Required(ErrorMessage = "Wprowadz nazwę kursu")]
         [StringLength(100)]
         public string TytulKursu { get; set; }
         [Required(ErrorMessage = "Wprowadz nazwę autora")]
@@ -23,6 +23,7 @@ namespace sklep_internetowy.Models
         public decimal CenaKursu { get; set; }
         public bool Bestseller { get; set; }
         public bool Ukryty { get; set; }
+        public string OpisSkrocony {get; set; }
 
         public virtual Kategoria Kategoria { get; set; }
 

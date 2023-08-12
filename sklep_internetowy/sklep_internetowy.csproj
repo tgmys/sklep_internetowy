@@ -129,6 +129,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308112102441_InitialCreate.cs" />
+    <Compile Include="Migrations\202308112102441_InitialCreate.designer.cs">
+      <DependentUpon>202308112102441_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308120924423_dodaniePolaOpisSkrocony.cs" />
+    <Compile Include="Migrations\202308120924423_dodaniePolaOpisSkrocony.designer.cs">
+      <DependentUpon>202308120924423_dodaniePolaOpisSkrocony.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Kurs.cs" />
     <Compile Include="Models\PozycjaZamowienia.cs" />
@@ -175,6 +184,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202308112102441_InitialCreate.resx">
+      <DependentUpon>202308112102441_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308120924423_dodaniePolaOpisSkrocony.resx">
+      <DependentUpon>202308120924423_dodaniePolaOpisSkrocony.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
