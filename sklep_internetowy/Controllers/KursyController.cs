@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sklep_internetowy.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace sklep_internetowy.Controllers
 {
     public class KursyController : Controller
     {
+        private KursyContext db = new KursyContext();
         // GET: Kursy
         public ActionResult Index()
         {
@@ -15,12 +17,22 @@ namespace sklep_internetowy.Controllers
         }
         public ActionResult Lista(string nazwaKategorii)
         {
-            return View();
+            var kategoria = db.Kategorie.Include("Kursy").Where(k => k.NazwaKategorii.ToUpper() == nazwaKategorii.ToUpper()).Single();
+            var kursy = kategoria.Kursy.ToList();
+            return View(kursy);
         }
         
         public ActionResult Szczegoly( string id)
         {
             return View();
+        }
+        
+        [ChildActionOnly]
+        public ActionResult KategorieMenu(string id)
+        {
+            var Kategorie = db.Kategorie.ToList();
+
+            return PartialView("_KategorieMenu", Kategorie);
         }
     }
 }

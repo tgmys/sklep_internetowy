@@ -14,11 +14,17 @@ namespace sklep_internetowy
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+            name: "KursyLista",
+            url: "Kategoria/{nazwaKategorii}",
+            defaults: new { controller = "Kursy", action = "Lista" }
+            );
+
+            routes.MapRoute(
                 name: "StronyStatyczne",
                 url: "strona/{nazwa}.html",
                 defaults: new { controller = "Home", action = "StronyStatyczne" }
                 );
-         
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

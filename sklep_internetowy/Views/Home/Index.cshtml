@@ -9,7 +9,7 @@
         @foreach (var kategoria in Model.Kategorie)
         {
             <li>
-                <a href="@Url.Action("List","Kursy",new { nazwaKategorii =kategoria.NazwaKategorii.ToLower() })"
+                <a href="@Url.Action("Lista","Kursy",new { nazwaKategorii =kategoria.NazwaKategorii.ToUpper() })"
                    style="background-image: url(@Url.IkonyKategoriiSciezka(kategoria.NazwaPlikuIkony)); ">
                     @kategoria.NazwaKategorii
                 </a>
