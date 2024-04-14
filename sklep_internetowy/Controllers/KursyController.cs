@@ -22,9 +22,11 @@ namespace sklep_internetowy.Controllers
             return View(kursy);
         }
         
-        public ActionResult Szczegoly( string id)
+        public ActionResult Szczegoly( int id)
         {
-            return View();
+            var kurs = db.Kursy.Find(id);
+
+            return View(kurs);
         }
         
         [ChildActionOnly]

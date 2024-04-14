@@ -20,6 +20,12 @@ namespace sklep_internetowy
             );
 
             routes.MapRoute(
+           name: "KursySzczegoly",
+           url: "kurs-{id}.html",
+           defaults: new { controller = "Kursy", action = "Szczegoly" }
+           );
+
+            routes.MapRoute(
                 name: "StronyStatyczne",
                 url: "strona/{nazwa}.html",
                 defaults: new { controller = "Home", action = "StronyStatyczne" }
