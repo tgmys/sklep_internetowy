@@ -30,8 +30,10 @@ namespace sklep_internetowy.Controllers
         }
         
         [ChildActionOnly]
-        public ActionResult KategorieMenu(string id)
+        [OutputCache(Duration = 60000)]
+        public ActionResult KategorieMenu()
         {
+          
             var Kategorie = db.Kategorie.ToList();
 
             return PartialView("_KategorieMenu", Kategorie);
