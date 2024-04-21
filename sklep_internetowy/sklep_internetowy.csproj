@@ -255,8 +255,11 @@
     <Compile Include="Infrastructure\Consts.cs" />
     <Compile Include="Infrastructure\DefaultCacheProvider.cs" />
     <Compile Include="Infrastructure\ICacheProvider.cs" />
+    <Compile Include="Infrastructure\ISessionMenager.cs" />
     <Compile Include="Infrastructure\KategorieDynamicNodeProvider.cs" />
+    <Compile Include="Infrastructure\KoszykMenager.cs" />
     <Compile Include="Infrastructure\KursySzczegolyDynamicNodeProvider.cs" />
+    <Compile Include="Infrastructure\SessionMenager.cs" />
     <Compile Include="Infrastructure\UrlHelpers.cs" />
     <Compile Include="Migrations\202308112102441_InitialCreate.cs" />
     <Compile Include="Migrations\202308112102441_InitialCreate.designer.cs">
@@ -269,6 +272,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Kurs.cs" />
+    <Compile Include="Models\PozycjaKoszyka.cs" />
     <Compile Include="Models\PozycjaZamowienia.cs" />
     <Compile Include="Models\Zamowienie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
