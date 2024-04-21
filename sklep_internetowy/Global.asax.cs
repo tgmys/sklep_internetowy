@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using sklep_internetowy.App_Start;
+using System.Web.Optimization;
 namespace sklep_internetowy
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -13,6 +14,7 @@ namespace sklep_internetowy
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

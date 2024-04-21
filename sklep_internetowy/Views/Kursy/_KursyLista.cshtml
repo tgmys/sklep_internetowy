@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<sklep_internetowy.Models.Kurs>
 @using sklep_internetowy.Infrastructure
 
-
-<ul class="KursyTrzyKolumny MalaListaKategorii">
-    @foreach (var kurs in Model)
-    {
+<div id="SekcjaListaKategori">
+    <ul class="KursyTrzyKolumny MalaListaKategorii">
+        @foreach (var kurs in Model)
+        {
 <li>
     <article>
         <a class="dodajDoKoszykaLink" href="@Url.Action("DodajDoKoszyka", "Koszyk", new { id=kurs.KursId})">
@@ -12,8 +12,7 @@
         </a>
         @if (kurs.Bestseller)
         {
-      <div class="bestsellerFlag">   </div>
-      }
+<div class="bestsellerFlag">   </div>}
         <a class="kursSzczegolyLink" href="@Url.Action("Szczegoly", "Kursy", new { id=kurs.KursId})">
             <img class="kurs" src="@Url.ObrazkiSciezka(kurs.NazwaPlikuObrazka)" />
             <h1>
@@ -22,6 +21,7 @@
         </a>
     </article>
 </li>}
-</ul>
+    </ul>
+</div>
 
 
