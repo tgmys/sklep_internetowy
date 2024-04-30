@@ -38,7 +38,7 @@ namespace sklep_internetowy.Infrastructure
         public void DodajDoKoszyka(int kursId)
         {
             var koszyk = PobierzKoszyk();
-            var pozycjaKoszyka = koszyk.Find(l => l.Kurs.KursId == kursId);
+            var pozycjaKoszyka = koszyk.Find(k => k.Kurs.KursId == kursId);
 
             if (pozycjaKoszyka != null)
                 pozycjaKoszyka.Ilosc++;
