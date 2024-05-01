@@ -3,15 +3,21 @@
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
 
-  <mvcSiteMapNode title="Home" controller="Home" action="Index">
-	  <mvcSiteMapNode title="Kategorie" controller="Kursy" action="Lista" dynamicNodeProvider="sklep_internetowy.Infrastructure.KategorieDynamicNodeProvider, sklep_internetowy" >
-	  <mvcSiteMapNode title="Kurs" controller="Kursy" action="Szczegoly" dynamicNodeProvider="sklep_internetowy.Infrastructure.KursySzczegolyDynamicNodeProvider, sklep_internetowy" />
-	  </mvcSiteMapNode>
+	<mvcSiteMapNode title="Home" controller="Home" action="Index">
+		<mvcSiteMapNode title="Kategorie" controller="Kursy" action="Lista" dynamicNodeProvider="sklep_internetowy.Infrastructure.KategorieDynamicNodeProvider, sklep_internetowy" >
+			<mvcSiteMapNode title="Kurs" controller="Kursy" action="Szczegoly" dynamicNodeProvider="sklep_internetowy.Infrastructure.KursySzczegolyDynamicNodeProvider, sklep_internetowy" />
+		</mvcSiteMapNode>
 
-	  <mvcSiteMapNode title="Koszyk" controller="Koszyk" action="Index">
-		  <mvcSiteMapNode title="Dane zamowienie" controller="Koszyk" action="Zaplac"/>
-		  <mvcSiteMapNode title="Potwierdzewnie zamowienia" controller="Koszyk" action="PotwierdzZamowienie"/>
-			  </mvcSiteMapNode>
-	  </mvcSiteMapNode>
-
+		<mvcSiteMapNode title="Koszyk" controller="Koszyk" action="Index">
+			<mvcSiteMapNode title="Dane zamowienie" controller="Koszyk" action="Zaplac"/>
+			<mvcSiteMapNode title="Potwierdzewnie zamowienia" controller="Koszyk" action="PotwierdzZamowienie"/>
+		</mvcSiteMapNode>
+		<mvcSiteMapNode title="Konto" controller="Manage" action="Index">
+			<mvcSiteMapNode title="Rejestracja" controller="Account" action="Register" />
+			<mvcSiteMapNode title="Logowanie" controller="Account" action="Login" />
+			<mvcSiteMapNode title="Edycja kursu" controller="Manage" action="DodajKurs" />
+			<mvcSiteMapNode title="Twoje dane" controller="Manage" action="Index" />
+			<mvcSiteMapNode title="Zamówienia" controller="Manage" action="ListaZamowien" />
+		</mvcSiteMapNode>
+	</mvcSiteMapNode>
 </mvcSiteMap>
