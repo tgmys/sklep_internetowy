@@ -308,6 +308,10 @@
     <Compile Include="Migrations\202405031353542_DodanieAspIdentity.designer.cs">
       <DependentUpon>202405031353542_DodanieAspIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405032034535_Zmowienia_zmiana.cs" />
+    <Compile Include="Migrations\202405032034535_Zmowienia_zmiana.designer.cs">
+      <DependentUpon>202405032034535_Zmowienia_zmiana.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DaneUzytkownika.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -381,6 +385,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Koszyk\Zaplac.cshtml" />
+    <Content Include="Views\Koszyk\PotwierdzenieZamowienia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -403,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405031353542_DodanieAspIdentity.resx">
       <DependentUpon>202405031353542_DodanieAspIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405032034535_Zmowienia_zmiana.resx">
+      <DependentUpon>202405032034535_Zmowienia_zmiana.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
