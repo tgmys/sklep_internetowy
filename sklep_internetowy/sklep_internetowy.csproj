@@ -313,6 +313,10 @@
     <Compile Include="Migrations\202405032034535_Zmowienia_zmiana.designer.cs">
       <DependentUpon>202405032034535_Zmowienia_zmiana.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406021658063_Zmiana_nazwy_kolumny.cs" />
+    <Compile Include="Migrations\202406021658063_Zmiana_nazwy_kolumny.designer.cs">
+      <DependentUpon>202406021658063_Zmiana_nazwy_kolumny.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DaneUzytkownika.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -391,6 +395,8 @@
     <Content Include="Views\Koszyk\PotwierdzenieZamowienia.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Shared\_MenageLayout.cshtml" />
+    <Content Include="Views\Manage\ListaZamowien.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -416,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405032034535_Zmowienia_zmiana.resx">
       <DependentUpon>202405032034535_Zmowienia_zmiana.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406021658063_Zmiana_nazwy_kolumny.resx">
+      <DependentUpon>202406021658063_Zmiana_nazwy_kolumny.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

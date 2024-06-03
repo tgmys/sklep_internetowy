@@ -18,8 +18,12 @@
             <a class="manageLink" href="@Url.Action("ListaZamowien", "Manage")" style="width: 100px">
                 Zamówienia
             </a>
- 
-            <!-- tutaj dodać kolejne opcje dla admina-->
+
+           
+            @if (@User.IsInRole("Admin"))
+            {
+                
+             }
 
             <a id="koszykHeaderLink" href="@Url.Action("Index", "Koszyk")">
                 KOSZYK (<span id="koszyk-naglowek-ilosc-elementow">@Html.Action("PobierzIloscElementowKoszyka", "Koszyk")</span>)

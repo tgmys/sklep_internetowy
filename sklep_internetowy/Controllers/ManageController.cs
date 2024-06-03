@@ -11,13 +11,15 @@ using Microsoft.Owin.Security;
 using sklep_internetowy.Models;
 using sklep_internetowy.Infrastructure;
 using sklep_internetowy.ViewModels;
-
+using sklep_internetowy.DAL;
+using System.Data.Entity;
 
 namespace sklep_internetowy.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private KursyContext db = new KursyContext();
         public enum MenageMessageId
         {
             ChangePasswordSuccess,
@@ -149,6 +151,39 @@ namespace sklep_internetowy.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+        }
+
+        public ActionResult ListaZamowien()
+        {
+            bool isAdmin = User.IsInRole("Admin");
+            ViewBag.UserIsAdmin = isAdmin;
+
+            IEnumerable<Zamowienie> zamowieniaUzytkownika;
+
+            //Dla admina wszystko zwraca
+
+            if(isAdmin)
+            {
+                zamowieniaUzytkownika = db.Zamowienia.Include("PozycjeZamowienia").OrderByDescending(o => o.DataDodania).ToArray();
+            }
+            else
+            {
+                var userId = User.Identity.GetUserId();
+                zamowieniaUzytkownika = db.Zamowienia.Where(o => o.UserId == userId).Include("PozycjeZamowienia").OrderByDescending(o => o.DataDodania).ToArray();
+            }
+
+            return View(zamowieniaUzytkownika);
+        }
+        [HttpPost]
+        [Authorize(Roles ="Admin")]
+        public StanZamowienia ZmianaStanuZamowienia(Zamowienie zamowienie)
+        {
+            Zamowienie zamowienieDpModyfikacji = db.Zamowienia.Find(zamowienie.ZamowienieID);
+            zamowienieDpModyfikacji.StanZamowienia = zamowienie.StanZamowienia;
+            db.SaveChanges();
+
+            return zamowienie.StanZamowienia;
+
         }
 
     }

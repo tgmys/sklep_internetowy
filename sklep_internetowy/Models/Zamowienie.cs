@@ -33,7 +33,7 @@ namespace sklep_internetowy.Models
         public string Email { get; set; }
         public string Komentarz { get; set; }
         public DateTime DataDodania { get; set; }
-        public StanZamowienia StenZamowienia { get; set; }
+        public StanZamowienia StanZamowienia { get; set; }
         public decimal WartoscZamowienia { get; set; }
 
         public List<PozycjaZamowienia> PozycjeZamowienia { get; set; }
