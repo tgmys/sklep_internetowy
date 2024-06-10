@@ -22,7 +22,15 @@
            
             @if (@User.IsInRole("Admin"))
             {
-                
+                <a class="manageLink" href="@Url.Action("DodajKurs", "Manage")">
+                    Dodaj
+                </a>
+                <a class="manageLink" href="@Url.Content("~/elmah")">
+                    Logi
+                </a>
+                <a class="manageLink" href="@Url.Content("~/hangfire")">
+                    Jobs
+                </a>
              }
 
             <a id="koszykHeaderLink" href="@Url.Action("Index", "Koszyk")">

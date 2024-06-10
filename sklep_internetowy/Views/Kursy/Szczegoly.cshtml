@@ -43,6 +43,11 @@
                        @Model.OpisSkrocony
                     </div>
 
+                    @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("DodajKurs","Manage", new { kursId=Model.KursId })" style="margin-top: 20px; font-weight: bold; display: block;">Edytuj</a>
+            }
+
                 </div>
             </section>
         </div>
