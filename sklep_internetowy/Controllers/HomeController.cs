@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 using sklep_internetowy.DAL;
 using sklep_internetowy.Infrastructure;
 using sklep_internetowy.Models;
@@ -13,9 +14,10 @@ namespace sklep_internetowy.Controllers
     public class HomeController : Controller
     {
         private KursyContext db = new KursyContext();
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public ActionResult Index()
         {
-            
+            logger.Info("Jesteś na stronie głównej");
 
             ICacheProvider cache = new DefaultCacheProvider();
             List<Kurs> nowosci;
