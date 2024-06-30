@@ -1,0 +1,29 @@
+﻿@model sklep_internetowy.ViewModels.PotwierdzenieZamowieniaEmail
+
+content-Type: text/plain; charset=utf-8
+
+Dziękujemy!
+
+Złożyłeś zamówienie w serwisie.
+
+Zamówione pozycje:
+
+@{ 
+    IEnumerable<sklep_internetowy.Models.PozycjaZamowienia> pozycjeZamowienia = Model.PozycjeZamowienia;
+
+    for (int i=0; i< pozycjeZamowienia.Count(); i++)
+            {
+                @pozycjeZamowienia.ElementAt(i).kurs.TytulKursu
+            }
+}
+
+Prosimy o przelanie kwoty @Model.Wartosc zł., tytułem zamówienia nr @Model.NumerZamowienia na nasze konto:
+
+sklep internetowy test
+ul.testowa 12
+12-123 Testowo
+PKO BP 1111 11111 11111 1111 1111 1
+
+Zaraz po otrzymaniu środków uzyskasz pełny dostęp
+
+Dziękujemy i zapraszamy ponownie !

@@ -12,11 +12,13 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Net;
 using System.Web.Mvc;
-
+using NLog;
+using Hangfire;
 namespace sklep_internetowy.Controllers
 {
     public class KoszykController : Controller
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private KoszykMenager koszykMenager;
         private ISessionMenager sessionMenager { get; set; }
         private KursyContext db;
@@ -123,15 +125,45 @@ namespace sklep_internetowy.Controllers
                 await UserManager.UpdateAsync(user);
 
                 koszykMenager.PustyKoszyk();
+
+                // BackgroundJob.Enqueue(() => System.Console.WriteLine("Testowe zadanie w tle"));
+                // BackgroundJob.Schedule(() => System.Console.WriteLine("Test zadanie na jutro do wykonania"), TimeSpan.FromDays(1));
+                // RecurringJob.AddOrUpdate(() => Console.WriteLine("Zadanie codziennie"), Cron.Daily);
+
+               string url = Url.Action("PotwierdzenieZamowieniaEmail", "Koszyk", new { zamowienieId = newOrder.ZamowienieID, nazwisko = newOrder.Nazwisko }, Request.Url.Scheme);
+               BackgroundJob.Enqueue(() => Call(url));
+
                 return RedirectToAction("PotwierdzenieZamowienia");
 
             }
             else
                 return View(zamowienieSzczegoly);
         }
+        public static void Call(string url)
+        {
+            var req = HttpWebRequest.Create(url);
+            req.GetResponseAsync();
+        }
 
+        public ActionResult PotwierdzenieZamowieniaEmail(int zamowienieId, string nazwisko)
+        {
+            var zamowienie = db.Zamowienia.Include("PozycjeZamowienia").Include("PozycjeZamowienia.Kurs").SingleOrDefault(o => o.ZamowienieID == zamowienieId && o.Nazwisko==nazwisko);
+            PotwierdzenieZamowieniaEmail email = new PotwierdzenieZamowieniaEmail();
+
+            if (zamowienie == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            email.To = zamowienie.Email;
+            email.From = "skleponline@gmail.com";
+            email.Wartosc = zamowienie.WartoscZamowienia;
+            email.NumerZamowienia = zamowienie.ZamowienieID;
+            email.PozycjeZamowienia = zamowienie.PozycjeZamowienia;
+            email.Send();
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
         public ActionResult PotwierdzenieZamowienia()
         {
+            var name = User.Identity.Name;
+            logger.Info("Strona koszyk | potwierdzenie | " + name);
             return View();
         }
 

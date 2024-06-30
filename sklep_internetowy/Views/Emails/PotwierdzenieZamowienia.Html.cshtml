@@ -1,0 +1,39 @@
+﻿@model sklep_internetowy.ViewModels.PotwierdzenieZamowieniaEmail
+Content-Type: text/html; charset=utf-8
+
+<html>
+<body>
+
+    @Html.EmbedImage("~/content/Images/logo.png")
+
+    <p>Dziękujemy!</p>
+    <p>Złożyłeś zamówienie w serwisie sklep internetowy.</p>
+    <p>Zamówione pozycje :</p>
+
+    @{ IEnumerable<sklep_internetowy.Models.PozycjaZamowienia> pozycjeZamowienia = Model.PozycjeZamowienia;
+
+        for (int i = 0; i < pozycjeZamowienia.Count(); i++)
+        {
+<p>
+    @pozycjeZamowienia.ElementAt(i).kurs.TytulKursu - @pozycjeZamowienia.ElementAt(i).kurs.AutorKursu
+    - @pozycjeZamowienia.ElementAt(i).kurs.CenaKursu zł. - @pozycjeZamowienia.ElementAt(i).Ilosc szt.
+</p> 
+    
+    } }
+
+    <p>Prosimy o przelanie kwoty @Model.Wartosc zł, tytułem: "zamówienie nr @Model.NumerZamowienia" na nasze konto bankowe:</p>
+    <p>Sklep u Tomka sp z.o o</p>
+    <p>ul. Mila 16/11</p>
+    <p>40-678 Tychy</p>
+    <p>PKO BP 11 1111 1111 1111 1111 1111 </p>
+
+    <p>Zaraz po otrzymaniu środków uzyskasz pełny dostęp do kursu</p>
+    <p>Dziękujemy i zapraszamy ponownie!</p>
+
+
+</body>
+
+</html>
+
+
+
