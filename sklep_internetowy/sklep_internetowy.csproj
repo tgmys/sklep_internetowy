@@ -318,6 +318,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -334,11 +335,16 @@
     <Compile Include="Infrastructure\AppConfig.cs" />
     <Compile Include="Infrastructure\Consts.cs" />
     <Compile Include="Infrastructure\DefaultCacheProvider.cs" />
+    <Compile Include="Infrastructure\HangFirePostalMailService.cs" />
+    <Compile Include="Infrastructure\Helpers.cs" />
+    <Compile Include="Infrastructure\HtmlExtensions.cs" />
     <Compile Include="Infrastructure\ICacheProvider.cs" />
+    <Compile Include="Infrastructure\IMailService.cs" />
     <Compile Include="Infrastructure\ISessionMenager.cs" />
     <Compile Include="Infrastructure\KategorieDynamicNodeProvider.cs" />
     <Compile Include="Infrastructure\KoszykMenager.cs" />
     <Compile Include="Infrastructure\KursySzczegolyDynamicNodeProvider.cs" />
+    <Compile Include="Infrastructure\PostalMailService.cs" />
     <Compile Include="Infrastructure\SessionMenager.cs" />
     <Compile Include="Infrastructure\UrlHelpers.cs" />
     <Compile Include="Migrations\202308112102441_InitialCreate.cs" />
@@ -381,7 +387,7 @@
     <Compile Include="ViewModels\KoszykUsuwanieViewModel.cs" />
     <Compile Include="ViewModels\KoszykViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
-    <Compile Include="ViewModels\PotwierdzenieZamowieniaEmail.cs" />
+    <Compile Include="ViewModels\EmailModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -453,6 +459,9 @@
     <Content Include="Views\Emails\PotwierdzenieZamowienia.cshtml" />
     <Content Include="Views\Emails\PotwierdzenieZamowienia.Text.cshtml" />
     <Content Include="Views\Emails\PotwierdzenieZamowienia.Html.cshtml" />
+    <Content Include="Views\Emails\ZamowienieZrealizowane.cshtml" />
+    <Content Include="Views\Emails\ZamowienieZrealizowane.Text.cshtml" />
+    <Content Include="Views\Emails\ZamowienieZrealizowane.Html.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

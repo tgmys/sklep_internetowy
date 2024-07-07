@@ -14,6 +14,8 @@ using System.Net;
 using System.Web.Mvc;
 using NLog;
 using Hangfire;
+
+
 namespace sklep_internetowy.Controllers
 {
     public class KoszykController : Controller
@@ -24,6 +26,7 @@ namespace sklep_internetowy.Controllers
         private KursyContext db;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IMailService maileService;
 
         public ApplicationUserManager UserManager
         {
@@ -36,12 +39,20 @@ namespace sklep_internetowy.Controllers
                 _userManager = value;
             }
         }
-
-        public KoszykController()
+        public KoszykController(KursyContext context, IMailService maileService, ISessionMenager sessionMenager)
         {
+            this.db = context;
+            this.maileService = maileService;
+            this.sessionMenager = sessionMenager;
+            koszykMenager = new KoszykMenager(sessionMenager, db);
+        }
+
+        public KoszykController(IMailService maileService)
+        {
+            this.maileService = maileService;
             db = new KursyContext();
             sessionMenager = new SessionMenager();
-            koszykMenager = new KoszykMenager(sessionMenager,db);
+            koszykMenager = new KoszykMenager(sessionMenager, db);
         }
 
         // GET: Koszyk
@@ -125,14 +136,14 @@ namespace sklep_internetowy.Controllers
                 await UserManager.UpdateAsync(user);
 
                 koszykMenager.PustyKoszyk();
-
                 // BackgroundJob.Enqueue(() => System.Console.WriteLine("Testowe zadanie w tle"));
                 // BackgroundJob.Schedule(() => System.Console.WriteLine("Test zadanie na jutro do wykonania"), TimeSpan.FromDays(1));
                 // RecurringJob.AddOrUpdate(() => Console.WriteLine("Zadanie codziennie"), Cron.Daily);
 
-               string url = Url.Action("PotwierdzenieZamowieniaEmail", "Koszyk", new { zamowienieId = newOrder.ZamowienieID, nazwisko = newOrder.Nazwisko }, Request.Url.Scheme);
-               BackgroundJob.Enqueue(() => Call(url));
-
+                //  string url = Url.Action("PotwierdzenieZamowieniaEmail", "Koszyk", new { zamowienieId = newOrder.ZamowienieID, nazwisko = newOrder.Nazwisko }, Request.Url.Scheme);
+                //  BackgroundJob.Enqueue(() => Call(url));
+                
+                maileService.WyslaniePotwierdzenieZamowieniaEmail(newOrder);
                 return RedirectToAction("PotwierdzenieZamowienia");
 
             }
@@ -145,21 +156,6 @@ namespace sklep_internetowy.Controllers
             req.GetResponseAsync();
         }
 
-        public ActionResult PotwierdzenieZamowieniaEmail(int zamowienieId, string nazwisko)
-        {
-            var zamowienie = db.Zamowienia.Include("PozycjeZamowienia").Include("PozycjeZamowienia.Kurs").SingleOrDefault(o => o.ZamowienieID == zamowienieId && o.Nazwisko==nazwisko);
-            PotwierdzenieZamowieniaEmail email = new PotwierdzenieZamowieniaEmail();
-
-            if (zamowienie == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-            email.To = zamowienie.Email;
-            email.From = "skleponline@gmail.com";
-            email.Wartosc = zamowienie.WartoscZamowienia;
-            email.NumerZamowienia = zamowienie.ZamowienieID;
-            email.PozycjeZamowienia = zamowienie.PozycjeZamowienia;
-            email.Send();
-
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
-        }
         public ActionResult PotwierdzenieZamowienia()
         {
             var name = User.Identity.Name;

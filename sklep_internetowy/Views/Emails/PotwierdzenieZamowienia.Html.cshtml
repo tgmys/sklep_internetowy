@@ -18,6 +18,9 @@ Content-Type: text/html; charset=utf-8
     @pozycjeZamowienia.ElementAt(i).kurs.TytulKursu - @pozycjeZamowienia.ElementAt(i).kurs.AutorKursu
     - @pozycjeZamowienia.ElementAt(i).kurs.CenaKursu zł. - @pozycjeZamowienia.ElementAt(i).Ilosc szt.
 </p> 
+<p>
+    @Html.EmbedImage(Path.Combine((string)Model.sciezkaObrazka, pozycjeZamowienia.ElementAt(i).kurs.NazwaPlikuObrazka), "", new { @width = 200, @class = "mcnImage", @style = "padding-bottom: 0px;max-width: 500px;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" })
+</p>
     
     } }
 
