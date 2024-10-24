@@ -10,7 +10,7 @@ namespace sklep_internetowy.Infrastructure
 {
     public class HangFirePostalMailService: IMailService
     {
-        public void WyslaniePotwierdzenieZamowieniaEmail(Zamowienie zamowienie)
+        public void WyslaniePotwierdzenieZamowieniaEmail(Zamowienie zamowienie, byte[] pdf)
         {
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             string url = urlHelper.Action("WyslaniePotwierdzenieZamowieniaEmail", "Manage", new { zamowienieId = zamowienie.ZamowienieID, nazwisko = zamowienie.Nazwisko }, HttpContext.Current.Request.Url.Scheme);

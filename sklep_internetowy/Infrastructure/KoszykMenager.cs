@@ -109,11 +109,16 @@ namespace sklep_internetowy.Infrastructure
 
             foreach(var koszykElement in koszyk)
             {
+                
+                var kurs = db.Kursy.FirstOrDefault(k => k.KursId == koszykElement.Kurs.KursId);
+
+
                 var nowePozycjaZamowienia = new PozycjaZamowienia()
                 {
                     KursId = koszykElement.Kurs.KursId,
                     Ilosc = koszykElement.Ilosc,
-                    CenaZakupu = koszykElement.Kurs.CenaKursu
+                    CenaZakupu = koszykElement.Kurs.CenaKursu,
+                    kurs = kurs
 
                 };
 

@@ -14,8 +14,11 @@ using System.Net;
 using System.Web.Mvc;
 using NLog;
 using Hangfire;
-
-
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using System.IO;
+using SelectPdf;
+using Postal;
 namespace sklep_internetowy.Controllers
 {
     public class KoszykController : Controller
@@ -27,6 +30,8 @@ namespace sklep_internetowy.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IMailService maileService;
+
+
 
         public ApplicationUserManager UserManager
         {
@@ -125,6 +130,7 @@ namespace sklep_internetowy.Controllers
         [HttpPost]
         public async Task<ActionResult> Zaplac(Zamowienie zamowienieSzczegoly)
         {
+
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
@@ -136,14 +142,27 @@ namespace sklep_internetowy.Controllers
                 await UserManager.UpdateAsync(user);
 
                 koszykMenager.PustyKoszyk();
+
+                string html = RenderViewToString("~/Views/Raporty/Report.cshtml", newOrder);
+
+                // Konwersja HTML na PDF
+                HtmlToPdf oHtmlToPdf = new HtmlToPdf();
+                PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
+
+                // Dodawanie hasła do pliku PDF, jeśli wymagane
+                oPdfDocument.Security.UserPassword = "password";
+
+                // Zapisanie PDF do tablicy bajtów
+                byte[] pdf = oPdfDocument.Save();
+                oPdfDocument.Close();
                 // BackgroundJob.Enqueue(() => System.Console.WriteLine("Testowe zadanie w tle"));
                 // BackgroundJob.Schedule(() => System.Console.WriteLine("Test zadanie na jutro do wykonania"), TimeSpan.FromDays(1));
                 // RecurringJob.AddOrUpdate(() => Console.WriteLine("Zadanie codziennie"), Cron.Daily);
 
-                //  string url = Url.Action("PotwierdzenieZamowieniaEmail", "Koszyk", new { zamowienieId = newOrder.ZamowienieID, nazwisko = newOrder.Nazwisko }, Request.Url.Scheme);
-                //  BackgroundJob.Enqueue(() => Call(url));
-                
-                maileService.WyslaniePotwierdzenieZamowieniaEmail(newOrder);
+               //  string url = Url.Action("PotwierdzenieZamowieniaEmail", "Koszyk", new { zamowienieId = newOrder.ZamowienieID, nazwisko = newOrder.Nazwisko }, Request.Url.Scheme);
+              //    BackgroundJob.Enqueue(() => Call(url));
+
+                maileService.WyslaniePotwierdzenieZamowieniaEmail(newOrder, pdf);
                 return RedirectToAction("PotwierdzenieZamowienia");
 
             }
@@ -161,6 +180,32 @@ namespace sklep_internetowy.Controllers
             var name = User.Identity.Name;
             logger.Info("Strona koszyk | potwierdzenie | " + name);
             return View();
+        }
+
+        public ActionResult GeneratePDF(int zamowienieId, string nazwisko, string html)
+        {
+            html = html.Replace("StrTag", "<").Replace("EndTag", ">");
+
+            HtmlToPdf oHtmlToPdf = new HtmlToPdf();
+            PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
+            byte[] pdf = oPdfDocument.Save();
+            oPdfDocument.Close();
+
+            return File(pdf, "application/pdf", "test.pdf");
+        }
+
+
+        private string RenderViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
 
     }

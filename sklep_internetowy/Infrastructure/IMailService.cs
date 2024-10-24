@@ -8,7 +8,7 @@ namespace sklep_internetowy.Infrastructure
 {
     public interface IMailService
     {
-        void WyslaniePotwierdzenieZamowieniaEmail(Zamowienie zamowienie);
+        void WyslaniePotwierdzenieZamowieniaEmail(Zamowienie zamowienie, byte[] pdf);
         void WyslanieZamowienieZrealizowaneEmail(Zamowienie zamowienie);
     }
 }

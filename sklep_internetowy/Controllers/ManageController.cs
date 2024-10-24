@@ -15,7 +15,9 @@ using sklep_internetowy.DAL;
 using System.Data.Entity;
 using System.IO;
 using System.Net;
+using System.Net.Mail;
 
+using SelectPdf;
 namespace sklep_internetowy.Controllers
 {
     [Authorize]
@@ -306,6 +308,27 @@ namespace sklep_internetowy.Controllers
             email.NumerZamowienia = zamowienie.ZamowienieID;
             email.PozycjeZamowienia = zamowienie.PozycjeZamowienia;
             email.sciezkaObrazka = AppConfig.ObrazkiFolderWzgledny;
+
+            // Odbierz PDF z żądania POST (zakładając, że przekazujesz pdf jako tablicę bajtów)
+            //  byte[] pdf = Request.BinaryRead(Request.ContentLength);
+            string html = RenderViewToString("~/Views/Raporty/Report.cshtml", zamowienie);
+
+            // Konwersja HTML na PDF
+            HtmlToPdf oHtmlToPdf = new HtmlToPdf();
+            PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
+
+            // Dodawanie hasła do pliku PDF, jeśli wymagane
+            oPdfDocument.Security.UserPassword = "password";
+
+            // Zapisanie PDF do tablicy bajtów
+            byte[] pdf = oPdfDocument.Save();
+            oPdfDocument.Close();
+
+            if (pdf != null && pdf.Length > 0)
+            {
+                email.Attach(new Attachment(new MemoryStream(pdf), "PotwierdzenieZamowienia.pdf"));
+            }
+
             email.Send();
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
@@ -326,6 +349,32 @@ namespace sklep_internetowy.Controllers
             email.Send();
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        public ActionResult GeneratePDF(int zamowienieId, string nazwisko, string html)
+        {
+            html = html.Replace("StrTag", "<").Replace("EndTag", ">");
+
+            HtmlToPdf oHtmlToPdf = new HtmlToPdf();
+            PdfDocument oPdfDocument = oHtmlToPdf.ConvertHtmlString(html);
+            byte[] pdf = oPdfDocument.Save();
+            oPdfDocument.Close();
+
+            return File(pdf, "application/pdf", "test.pdf");
+        }
+
+
+        private string RenderViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }

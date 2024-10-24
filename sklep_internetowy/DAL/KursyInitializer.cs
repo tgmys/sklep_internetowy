@@ -31,9 +31,9 @@ namespace sklep_internetowy.DAL
 
             var kursy = new List<Kurs>
             {
-                 new Kurs() { KursId=1, AutorKursu="Tomasz", TytulKursu="Asp.Net", KategoriaID=1, CenaKursu=0, Bestseller=true, NazwaPlikuObrazka="obrazekaspnet.png",
+                 new Kurs() { KursId=1, AutorKursu="Tomasz", TytulKursu="Asp.Net", KategoriaID=1, CenaKursu=200, Bestseller=true, NazwaPlikuObrazka="obrazekaspnet.png",
                 DataDodania = DateTime.Now, OpisKursu="Kurs ASP.NET - doskonała platforma do tworzenia dynamicznych aplikacji internetowych. Kurs jest przeznaczony dla wszystkich osób, które chcą nauczyć się od podstaw tworzenia stron internetowych wykorzystując technologię ASP-NET."},
-                new Kurs() { KursId=2, AutorKursu="Tomasz", TytulKursu="Asp.Net Mvc", KategoriaID=1, CenaKursu=0, Bestseller=true, NazwaPlikuObrazka="obrazekmvc.png",
+                new Kurs() { KursId=2, AutorKursu="Tomasz", TytulKursu="Asp.Net Mvc", KategoriaID=1, CenaKursu=450, Bestseller=true, NazwaPlikuObrazka="obrazekmvc.png",
                 DataDodania = DateTime.Now, OpisKursu="Kurs ASP.NET MVC - przeznaczony jest dla wszystkich osób, które chcą nauczyć się od podstaw tworzenia stron internetowych wykorzystując technologię ASP-NET MVC."},
                 new Kurs() { KursId=3, AutorKursu="Tomasz", TytulKursu="Asp.Net Mvc - Sklep Internetowy", KategoriaID=1, CenaKursu=100, Bestseller=true, NazwaPlikuObrazka="obrazekmvc2.png",
                 DataDodania = DateTime.Now, OpisKursu="Kurs Asp.Net Mvc - Sklep Internetowy - to praktyczne rozwiązanie wykorzystujące technologię Asp.Net Mvc pokazujące krok po kroku budowanie serwisu internetowego sprzedającego kursy on-line"},
